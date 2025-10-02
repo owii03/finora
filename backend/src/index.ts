@@ -13,7 +13,7 @@ import authRoutes from "./routes/auth.route";
 import { passportAuthenticateJwt } from "./config/passport.config";
 import userRoutes from "./routes/user.route";
 import transactionRoutes from "./routes/transaction.route";
-import { initializeCrons } from "./cron";
+import { initializeCrons } from "./crons";
 import reportRoutes from "./routes/report.route";
 import { getDateRange } from "./utils/date";
 import analyticsRoutes from "./routes/analytics.route";
@@ -38,7 +38,7 @@ app.get(
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     throw new BadRequestException("This is a test error");
     res.status(HTTPSTATUS.OK).json({
-      message: "Hello Subcribe to the channel",
+      message: "Hello Everybody!",
     });
   })
 );
