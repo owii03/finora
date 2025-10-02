@@ -8,7 +8,7 @@ import { HTTPSTATUS } from "./config/http.config";
 import { errorHandler } from "./middlewares/errorHandler.middle";
 import { BadRequestException } from "./utils/app-error";
 import { asyncHandler } from "./middlewares/asyncHandler.middle";
-import connctDatabase from "./config/database.config";
+import connectDatabase from "./config/database.config";
 import authRoutes from "./routes/auth.route";
 import { passportAuthenticateJwt } from "./config/passport.config";
 import userRoutes from "./routes/user.route";
@@ -36,7 +36,6 @@ app.use(
 app.get(
   "/",
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    throw new BadRequestException("This is a test error");
     res.status(HTTPSTATUS.OK).json({
       message: "Hello Everybody!",
     });
@@ -52,7 +51,7 @@ app.use(`${BASE_PATH}/analytics`, passportAuthenticateJwt, analyticsRoutes);
 app.use(errorHandler);
 
 app.listen(Env.PORT, async () => {
-  await connctDatabase();
+  await connectDatabase();
 
   if (Env.NODE_ENV === "development") {
     await initializeCrons();
